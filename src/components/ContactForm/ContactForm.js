@@ -17,13 +17,19 @@ export default class ContactForm extends Component {
     const { name, number } = this.state;
 
     // this.props.deleteIfSame(name);
-
     const newContact = {};
     newContact.name = name;
     newContact.idKey = nanoid();
     newContact.number = number;
-
+    const list = this.props.contacts.map(contact => contact.name.toLowerCase());
+    if (list.includes(name.toLowerCase())) {
+      alert(`${name} is already in contact`);
+      this.reset();
+      return;
+    }
     this.props.addContact(newContact);
+
+    // this.props.addContact(newContact);
 
     this.reset();
   };

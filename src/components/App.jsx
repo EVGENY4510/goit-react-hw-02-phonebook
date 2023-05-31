@@ -64,6 +64,7 @@ class App extends Component {
         <ContactForm
           addContact={this.addContact}
           deleteIfSame={this.deleteIfSame}
+          contacts={this.state.contacts}
         />
 
         <h2>Contacts</h2>

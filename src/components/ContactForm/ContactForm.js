@@ -16,7 +16,7 @@ export default class ContactForm extends Component {
     e.preventDefault();
     const { name, number } = this.state;
 
-    this.props.deleteIfSame(name);
+    // this.props.deleteIfSame(name);
 
     const newContact = {};
     newContact.name = name;

@@ -9,18 +9,18 @@ class App extends Component {
     filter: '',
   };
 
-  deleteIfSame = params => {
-    this.state.contacts.map(contact => {
-      if (contact.name === params) {
-        alert(`${contact.name} is already in contact`);
-        this.setState(prevState => ({
-          contacts: prevState.contacts.filter(
-            contact => contact.name !== params
-          ),
-        }));
-      }
-    });
-  };
+  // deleteIfSame = params => {
+  //   this.state.contacts.map(contact => {
+  //     if (contact.name === params) {
+  //       alert(`${contact.name} is already in contact`);
+  //       this.setState(prevState => ({
+  //         contacts: prevState.contacts.filter(
+  //           contact => contact.name !== params
+  //         ),
+  //       }));
+  //     }
+  //   });
+  // };
 
   deleteContact = params => {
     this.setState(prevState => ({
@@ -64,7 +64,6 @@ class App extends Component {
         <ContactForm
           addContact={this.addContact}
           deleteIfSame={this.deleteIfSame}
-          contacts={this.state.contacts}
         />
 
         <h2>Contacts</h2>

@@ -11,11 +11,7 @@ export default class ContactForm extends Component {
     const { name, value } = e.target;
     this.setState({ [name]: value });
   };
-  // this.props.contacts.map(contact => {
-  //       if (contact.name === name) {
-  //         return alert(`${contact.name} is already in contact`);
-  //       }
-  //     });
+
   onSubmitForm = e => {
     e.preventDefault();
     const { name, number } = this.state;

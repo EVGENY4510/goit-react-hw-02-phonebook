@@ -2,25 +2,13 @@ import React, { Component } from 'react';
 import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
+import css from './app.module.css';
 
 class App extends Component {
   state = {
     contacts: [],
     filter: '',
   };
-
-  // deleteIfSame = params => {
-  //   this.state.contacts.map(contact => {
-  //     if (contact.name === params) {
-  //       alert(`${contact.name} is already in contact`);
-  //       this.setState(prevState => ({
-  //         contacts: prevState.contacts.filter(
-  //           contact => contact.name !== params
-  //         ),
-  //       }));
-  //     }
-  //   });
-  // };
 
   deleteContact = params => {
     this.setState(prevState => ({
@@ -46,11 +34,15 @@ class App extends Component {
       return contactLower.includes(searchResultLower);
     });
     return filteredContacts.map(contact => (
-      <li key={contact.idKey}>
-        <p>
-          {contact.name}:<span>{contact.number}</span>
+      <li key={contact.idKey} className={css.item}>
+        <p className={css.contact}>
+          - {contact.name} :<span className={css.span}>{contact.number}</span>
         </p>
-        <button type="button" onClick={() => this.deleteContact(contact.idKey)}>
+        <button
+          className={css.deleteButton}
+          type="button"
+          onClick={() => this.deleteContact(contact.idKey)}
+        >
           Delete
         </button>
       </li>
@@ -59,15 +51,15 @@ class App extends Component {
 
   render() {
     return (
-      <div>
-        <h1>Phonebook</h1>
+      <div className={css.appWrapper}>
+        <h1 className={css.title}>Phonebook</h1>
         <ContactForm
           addContact={this.addContact}
           deleteIfSame={this.deleteIfSame}
           contacts={this.state.contacts}
         />
 
-        <h2>Contacts</h2>
+        <h2 className={css.titleContact}>Contacts</h2>
         <Filter addFilter={this.addFilter} />
         <ContactList displaySearchResult={this.displaySearchResult} />
       </div>

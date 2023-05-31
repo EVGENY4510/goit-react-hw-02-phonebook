@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import css from './Filter.module.css';
 
 export default class Filter extends Component {
   handleSearch = e => {
@@ -9,9 +10,14 @@ export default class Filter extends Component {
   render() {
     return (
       <>
-        <label>
+        <label className={css.label}>
           Find contacts by name
-          <input type="text" name="filter" onChange={this.handleSearch} />
+          <input
+            className={css.input}
+            type="text"
+            name="filter"
+            onChange={this.handleSearch}
+          />
         </label>
       </>
     );

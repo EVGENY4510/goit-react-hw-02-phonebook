@@ -3,6 +3,7 @@ import ContactForm from './ContactForm/ContactForm';
 import Filter from './Filter/Filter';
 import ContactList from './ContactList/ContactList';
 import css from './app.module.css';
+import { nanoid } from 'nanoid';
 
 class App extends Component {
   state = {
@@ -21,8 +22,20 @@ class App extends Component {
   };
 
   addContact = params => {
+    const { name, number } = params;
+
+    console.log(name, number);
+    const newContact = {};
+    newContact.name = name;
+    newContact.idKey = nanoid();
+    newContact.number = number;
+    const list = this.state.contacts.map(contact => contact.name.toLowerCase());
+    if (list.includes(name.toLowerCase())) {
+      alert(`${name} is already in contact`);
+      return;
+    }
     this.setState(prevState => ({
-      contacts: [...prevState.contacts, params],
+      contacts: [...prevState.contacts, newContact],
     }));
   };
 
@@ -30,10 +43,7 @@ class App extends Component {
     return (
       <div className={css.appWrapper}>
         <h1 className={css.title}>Phonebook</h1>
-        <ContactForm
-          addContact={this.addContact}
-          contacts={this.state.contacts}
-        />
+        <ContactForm addContact={this.addContact} />
 
         <h2 className={css.titleContact}>Contacts</h2>
         <Filter onChangeFilter={this.onChangeFilter} />

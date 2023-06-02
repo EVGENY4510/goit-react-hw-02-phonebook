@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { nanoid } from 'nanoid';
 import css from './Contact.module.css';
 
 export default class ContactForm extends Component {
@@ -17,17 +16,7 @@ export default class ContactForm extends Component {
     e.preventDefault();
     const { name, number } = this.state;
 
-    const newContact = {};
-    newContact.name = name;
-    newContact.idKey = nanoid();
-    newContact.number = number;
-    const list = this.props.contacts.map(contact => contact.name.toLowerCase());
-    if (list.includes(name.toLowerCase())) {
-      alert(`${name} is already in contact`);
-      this.reset();
-      return;
-    }
-    this.props.addContact(newContact);
+    this.props.addContact({ name, number });
 
     this.reset();
   };

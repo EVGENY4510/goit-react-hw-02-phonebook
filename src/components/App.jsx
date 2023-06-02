@@ -16,7 +16,7 @@ class App extends Component {
     }));
   };
 
-  addFilter = value => {
+  onChangeFilter = value => {
     this.setState({ filter: value });
   };
 
@@ -25,29 +25,6 @@ class App extends Component {
       contacts: [...prevState.contacts, params],
     }));
   };
-  displaySearchResult = () => {
-    const { contacts, filter } = this.state;
-
-    const filteredContacts = contacts.filter(contact => {
-      const searchResultLower = filter.toLowerCase();
-      const contactLower = contact.name.toLowerCase();
-      return contactLower.includes(searchResultLower);
-    });
-    return filteredContacts.map(contact => (
-      <li key={contact.idKey} className={css.item}>
-        <p className={css.contact}>
-          - {contact.name} :<span className={css.span}>{contact.number}</span>
-        </p>
-        <button
-          className={css.deleteButton}
-          type="button"
-          onClick={() => this.deleteContact(contact.idKey)}
-        >
-          Delete
-        </button>
-      </li>
-    ));
-  };
 
   render() {
     return (
@@ -55,13 +32,16 @@ class App extends Component {
         <h1 className={css.title}>Phonebook</h1>
         <ContactForm
           addContact={this.addContact}
-          deleteIfSame={this.deleteIfSame}
           contacts={this.state.contacts}
         />
 
         <h2 className={css.titleContact}>Contacts</h2>
-        <Filter addFilter={this.addFilter} />
-        <ContactList displaySearchResult={this.displaySearchResult} />
+        <Filter onChangeFilter={this.onChangeFilter} />
+        <ContactList
+          contacts={this.state.contacts}
+          filter={this.state.filter}
+          deleteContact={this.deleteContact}
+        />
       </div>
     );
   }

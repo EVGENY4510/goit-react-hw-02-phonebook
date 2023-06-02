@@ -4,7 +4,7 @@ import css from './Filter.module.css';
 export default class Filter extends Component {
   handleSearch = e => {
     const value = e.target.value;
-    this.props.addFilter(value);
+    this.props.onChangeFilter(value);
   };
 
   render() {
